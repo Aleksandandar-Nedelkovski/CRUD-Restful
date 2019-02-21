@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Welcome </title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h3>Add Task</h3>
+        <form (submit)="createTask()">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Title</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="title"
+              [(ngModel)]="newTask.title">
+            <label for="exampleFormControlTextarea1">Description</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"
+              [(ngModel)]="newTask.description"></textarea>
+            <button class="btn btn-primary btn-sm" type="submit">Submit</button>
+          </div>
+        </form>
+
+        <div *ngFor="let task of tasks" class="task">
+          <b>Title: </b> {{ task.title }}<br>
+          <b>Description:</b> {{ task.description }}
+          <p></p>
+          <button type="button" class="btn btn-secondary btn-sm" (click)="showEdit(task)">Edit</button>
+          <button type="button" class="btn btn-danger btn-sm" (click)="deleteTask(task._id)">Delete</button>
+          <p></p>
+          <div *ngIf="formHeader == task._id">
+            <form (submit)="editTask(task)">
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Title</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="title"
+                  [(ngModel)]="updatedTask.title">
+                <label for="exampleFormControlTextarea1">Description</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"
+                  [(ngModel)]="updatedTask.description"></textarea>
+                  <button class="btn btn-primary btn-sm" type="submit">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div><!-- left column ends -->
+      <div class="col"></div> <!-- right column ends -->
+    </div><!-- row ends -->
+  </div><!-- container ends -->
+</body>
+
+</html>
